@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SonicEquity | Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700&family=Inter:wght@400;500&family=Geist:wght@400;500&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Inter:wght@100..900&family=Plus+Jakarta+Sans:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(23, 31, 51, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 50%);
+            pointer-events: none;
+        }
+        .pulse-accent {
+            box-shadow: 0 0 15px rgba(208, 188, 255, 0.2);
+        }
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(11, 19, 38, 1);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(208, 188, 255, 0.3);
+            border-radius: 10px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary": "#640039",
+                        "primary": "#d0bcff",
+                        "surface-container": "#171f33",
+                        "on-tertiary-container": "#570032",
+                        "on-secondary-container": "#00424e",
+                        "secondary": "#4cd7f6",
+                        "surface-bright": "#31394d",
+                        "surface-container-highest": "#2d3449",
+                        "on-error-container": "#ffdad6",
+                        "primary-container": "#a078ff",
+                        "secondary-container": "#03b5d3",
+                        "outline-variant": "#494454",
+                        "on-surface-variant": "#cbc3d7",
+                        "inverse-primary": "#6d3bd7",
+                        "tertiary-fixed": "#ffd9e4",
+                        "tertiary-fixed-dim": "#ffb0cd",
+                        "surface-container-high": "#222a3d",
+                        "surface-tint": "#d0bcff",
+                        "outline": "#958ea0",
+                        "on-primary-fixed": "#23005c",
+                        "surface-dim": "#0b1326",
+                        "surface-variant": "#2d3449",
+                        "on-secondary-fixed-variant": "#004e5c",
+                        "primary-fixed": "#e9ddff",
+                        "surface-container-lowest": "#060e20",
+                        "secondary-fixed": "#acedff",
+                        "secondary-fixed-dim": "#4cd7f6",
+                        "tertiary-container": "#f751a1",
+                        "surface": "#0b1326",
+                        "on-primary-container": "#340080",
+                        "background": "#0b1326",
+                        "inverse-on-surface": "#283044",
+                        "on-tertiary-fixed": "#3e0022",
+                        "on-tertiary-fixed-variant": "#8c0053",
+                        "on-primary": "#3c0091",
+                        "on-surface": "#dae2fd",
+                        "error": "#ffb4ab",
+                        "tertiary": "#ffb0cd",
+                        "inverse-surface": "#dae2fd",
+                        "on-primary-fixed-variant": "#5516be",
+                        "on-secondary": "#003640",
+                        "on-background": "#dae2fd",
+                        "error-container": "#93000a",
+                        "on-secondary-fixed": "#001f26",
+                        "on-error": "#690005",
+                        "primary-fixed-dim": "#d0bcff",
+                        "surface-container-low": "#131b2e"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "mono-data": ["Geist"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "label-sm": ["Geist"]
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "margin-desktop": "48px",
+                        "container-max": "1280px",
+                        "margin-mobile": "16px",
+                        "unit": "4px"
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md min-h-screen pb-24">
+<!-- TopAppBar Shell -->
+<header class="flex justify-between items-center px-4 h-16 w-full sticky top-0 z-50 bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-b border-white/10">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center overflow-hidden border border-white/20">
+<img class="w-full h-full object-cover" data-alt="A professional studio portrait of a modern music producer with neon purple lighting reflecting off high-tech headphones. The background is a dark, sophisticated studio environment with soft bokeh effects and a futuristic tech aesthetic consistent with high-end fintech branding." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRdjdq1duyRVPtwRsxVNJfymL5SkyQrJ8gwseF4KeEvG9oESmR12hag9Ko9bhdgMnRuS_WhacCIQEjXzxlvQbOmcx87iix5Ent09L3yK5EJ9DN2DztMFOlSIVsXzQcVCE5f1cuMP5u5GCt8oHi68w8SNsFrQej1pKAOjv_1E89k9uNROtbVuySmQcS54BNPsIMN1wkZklE7XHsAHRhx2W2y93xxQpOSpE8cnRje1eKlztmPUN0sV_TpuSqarjm8CAMMCQfRjmsAg"/>
+</div>
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">SonicEquity</span>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:opacity-80 transition-opacity active:scale-90 text-primary dark:text-primary-fixed">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</header>
+<main class="max-w-container-max mx-auto px-4 mt-6 space-y-8">
+<!-- Total Royalties Balance Card -->
+<section class="glass-card rounded-xl p-6 relative overflow-hidden">
+<div class="absolute -top-12 -right-12 w-48 h-48 bg-primary/10 blur-[64px] rounded-full"></div>
+<div class="relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div class="space-y-1">
+<span class="font-label-sm text-on-surface-variant uppercase tracking-widest opacity-70">Total Royalties</span>
+<div class="flex items-baseline gap-3">
+<h1 class="text-4xl md:text-5xl font-bold font-headline-md text-primary tracking-tight">12,482.50</h1>
+<span class="text-xl font-mono-data text-secondary">XLM</span>
+</div>
+<p class="text-on-surface-variant font-body-md">≈ $1,348.11 USD</p>
+</div>
+<div class="flex gap-2">
+<button class="bg-primary text-on-primary font-bold px-6 py-3 rounded-lg flex items-center gap-2 hover:opacity-90 transition-all active:scale-95 shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined">payments</span>
+                        Claim All
+                    </button>
+<button class="bg-white/5 border border-white/10 backdrop-blur-md text-on-surface font-bold px-4 py-3 rounded-lg hover:bg-white/10 transition-all active:scale-95">
+<span class="material-symbols-outlined">trending_up</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Active Splits Horizontal Slider -->
+<section class="space-y-4">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-md text-headline-md text-on-surface">Active Splits</h2>
+<button class="text-secondary font-label-sm flex items-center gap-1 hover:underline">
+                    View All <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+<div class="flex gap-4 overflow-x-auto pb-4 -mx-4 px-4 snap-x">
+<!-- Split Card 1 -->
+<div class="glass-card flex-shrink-0 w-[280px] rounded-xl p-4 snap-start group transition-all hover:border-primary/30">
+<div class="flex items-start justify-between mb-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest overflow-hidden border border-white/5">
+<img class="w-full h-full object-cover" data-alt="Vibrant album artwork featuring abstract electric violet and cyan waveforms on a deep obsidian background. The style is modern, cinematic, and suggests high-fidelity audio production, aligning with the SonicEquity brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnguQ1_wAM2mUXxhUy6WOzsHxxut4i2hF8Oof75c5ysCp42Gavc2Pan_ihExhBgqL18FHhdLtPwioiYQW-GyW5e3Wl9dar3jf0IqLSaV578xeBU5bUGq3CpGu65wExdfrgTc-G2WE0e8_OAzC4jpbAiTvKj6JNdr8_xlqTRC3XtDR_CoWTNNOwne4IvAaIt7vqMpVkdF5IelHigvAru7KTLJgH1cwMPxkAHPJD-rgOl4UnWM6KEdRrTLmKjmQn_Qt1XIStHhzmQQ"/>
+</div>
+<div class="bg-primary/10 text-primary px-2 py-1 rounded text-[10px] font-bold uppercase tracking-tighter">15% Share</div>
+</div>
+<h3 class="font-headline-md text-lg truncate mb-1">Neon Dreams</h3>
+<p class="text-on-surface-variant font-label-sm mb-4">Master Recording Split</p>
+<div class="space-y-2">
+<div class="flex justify-between text-[11px] font-mono-data text-on-surface-variant">
+<span>REVENUE GOAL</span>
+<span>82%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full pulse-accent" style="width: 82%"></div>
+</div>
+</div>
+</div>
+<!-- Split Card 2 -->
+<div class="glass-card flex-shrink-0 w-[280px] rounded-xl p-4 snap-start group transition-all hover:border-primary/30">
+<div class="flex items-start justify-between mb-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest overflow-hidden border border-white/5">
+<img class="w-full h-full object-cover" data-alt="A minimalist tech-inspired album cover with glowing geometric lines and nodes representing a network. The primary colors are deep blacks and luminous cyan, creating a professional fintech atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDN9mBFaG-_2KK8AqeevSJ-uE4j6porrd7pcEknSSkEu0DID1guFTJrWaX09I_8tztMSV9JsJOEeEdOrK52Yu39oWWMJgz_Rb2cUJfsjXI496p1fxgXTg4MYYcmRgZ9dfjHgGwc9RlHj8AH-8eYYmLRqgC88oJFuzKDcK-NVxZFDoOwSIr0LpfvITpPZYm-AnzpkIAf4oG3vx0aD4DEZozmZ_zmjmmCPPZkIUPCnGeJW4rQhrZ66rbPSot4cWwxJAwd8V6ZEbST7A"/>
+</div>
+<div class="bg-secondary/10 text-secondary px-2 py-1 rounded text-[10px] font-bold uppercase tracking-tighter">25% Share</div>
+</div>
+<h3 class="font-headline-md text-lg truncate mb-1">Cybernetic Soul</h3>
+<p class="text-on-surface-variant font-label-sm mb-4">Songwriter Royalty</p>
+<div class="space-y-2">
+<div class="flex justify-between text-[11px] font-mono-data text-on-surface-variant">
+<span>REVENUE GOAL</span>
+<span>45%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 45%"></div>
+</div>
+</div>
+</div>
+<!-- Split Card 3 -->
+<div class="glass-card flex-shrink-0 w-[280px] rounded-xl p-4 snap-start group transition-all hover:border-primary/30">
+<div class="flex items-start justify-between mb-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest overflow-hidden border border-white/5">
+<img class="w-full h-full object-cover" data-alt="An ethereal and atmospheric music cover with blurred luminous light leaks in violet and teal. The composition is artistic and premium, emphasizing a sense of creative high-fidelity and decentralized precision." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBW_k85glXlIuZtTB_G2ZDLeKNSQCuWGJQn88RLGW6Jp-OwhV_7yhSQWm6YRjIzOw-S3oqjWKUFeCrt7ybWJITFIsAoxy-QiGjLwtlizkNtB3SeUQ-779_9mp31JTbzUYQ7P2Y8kGtl_mrihIY5rDsMt6F91btweqlHaeaWVmawpqfsMKdfYzPjtrzDRMPSU364BXgrn6Gig1CHtvqraOF8WDBbMmMdopIIM_O75cJZ9odeGGEfTingV6nttUS1cCyGgqYLIr52xw"/>
+</div>
+<div class="bg-tertiary/10 text-tertiary px-2 py-1 rounded text-[10px] font-bold uppercase tracking-tighter">10% Share</div>
+</div>
+<h3 class="font-headline-md text-lg truncate mb-1">Ethereal Flow</h3>
+<p class="text-on-surface-variant font-label-sm mb-4">Publishing Rights</p>
+<div class="space-y-2">
+<div class="flex justify-between text-[11px] font-mono-data text-on-surface-variant">
+<span>REVENUE GOAL</span>
+<span>12%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-tertiary rounded-full" style="width: 12%"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Recent Distributions Feed -->
+<section class="space-y-4">
+<h2 class="font-headline-md text-headline-md text-on-surface px-1">Recent Distributions</h2>
+<div class="glass-card rounded-xl divide-y divide-white/5">
+<!-- Feed Item 1 -->
+<div class="flex items-center justify-between p-4 hover:bg-white/5 transition-colors group">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">equalizer</span>
+</div>
+<div>
+<p class="font-bold text-on-surface group-hover:text-primary transition-colors">Neon Dreams</p>
+<p class="text-on-surface-variant font-label-sm">Streaming Distribution • 2h ago</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-mono-data font-bold text-secondary">+142.50 XLM</p>
+<p class="text-[10px] text-on-surface-variant uppercase">Confirmed</p>
+</div>
+</div>
+<!-- Feed Item 2 -->
+<div class="flex items-center justify-between p-4 hover:bg-white/5 transition-colors group">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded bg-secondary/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">radio</span>
+</div>
+<div>
+<p class="font-bold text-on-surface group-hover:text-secondary transition-colors">Cybernetic Soul</p>
+<p class="text-on-surface-variant font-label-sm">Mechanical Royalty • 5h ago</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-mono-data font-bold text-secondary">+85.00 XLM</p>
+<p class="text-[10px] text-on-surface-variant uppercase">Confirmed</p>
+</div>
+</div>
+<!-- Feed Item 3 -->
+<div class="flex items-center justify-between p-4 hover:bg-white/5 transition-colors group">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded bg-tertiary/10 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">interpreter_mode</span>
+</div>
+<div>
+<p class="font-bold text-on-surface group-hover:text-tertiary transition-colors">Digital Pulse</p>
+<p class="text-on-surface-variant font-label-sm">Sync License • 1d ago</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-mono-data font-bold text-secondary">+1,200.00 XLM</p>
+<p class="text-[10px] text-on-surface-variant uppercase">Confirmed</p>
+</div>
+</div>
+<!-- Feed Item 4 -->
+<div class="flex items-center justify-between p-4 hover:bg-white/5 transition-colors group">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">mic</span>
+</div>
+<div>
+<p class="font-bold text-on-surface group-hover:text-primary transition-colors">Midnight Echo</p>
+<p class="text-on-surface-variant font-label-sm">Live Performance • 2d ago</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-mono-data font-bold text-secondary">+42.15 XLM</p>
+<p class="text-[10px] text-on-surface-variant uppercase">Confirmed</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar Shell -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 py-2 pb-safe bg-surface-container/90 dark:bg-surface-container/90 backdrop-blur-2xl border-t border-white/5 rounded-t-xl">
+<!-- Dashboard (Active) -->
+<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary-container text-on-secondary-container dark:text-on-secondary-container rounded-full px-4 py-1 Active: scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-label-sm text-label-sm">Dashboard</span>
+</a>
+<!-- Projects -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant opacity-60 hover:text-secondary transition-colors" href="#">
+<span class="material-symbols-outlined">album</span>
+<span class="font-label-sm text-label-sm">Projects</span>
+</a>
+<!-- Split (Add) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant opacity-60 hover:text-secondary transition-colors" href="#">
+<span class="material-symbols-outlined">add_circle</span>
+<span class="font-label-sm text-label-sm">Split</span>
+</a>
+<!-- Wallet -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant opacity-60 hover:text-secondary transition-colors" href="#">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="font-label-sm text-label-sm">Wallet</span>
+</a>
+</nav>
+<script>
+        // Simple micro-interaction for cards
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+    </script>
+</body></html>

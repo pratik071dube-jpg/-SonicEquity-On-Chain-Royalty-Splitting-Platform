@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SonicEquity - Midnight Echoes</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Geist:wght@400;500;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Inter:wght@100..900&family=Plus+Jakarta+Sans:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(23, 31, 51, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.05);
+        }
+        .neon-border-glow:focus-within {
+            box-shadow: 0 0 15px rgba(76, 215, 246, 0.3);
+            border-color: #4cd7f6;
+        }
+        .level-meter-segment {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+        .level-meter-active {
+            background: linear-gradient(90deg, #d0bcff, #4cd7f6);
+            box-shadow: 0 0 10px rgba(76, 215, 246, 0.5);
+        }
+        body {
+            background-color: #0b1326;
+            color: #dae2fd;
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary": "#640039",
+                        "primary": "#d0bcff",
+                        "surface-container": "#171f33",
+                        "on-tertiary-container": "#570032",
+                        "on-secondary-container": "#00424e",
+                        "secondary": "#4cd7f6",
+                        "surface-bright": "#31394d",
+                        "surface-container-highest": "#2d3449",
+                        "on-error-container": "#ffdad6",
+                        "primary-container": "#a078ff",
+                        "secondary-container": "#03b5d3",
+                        "outline-variant": "#494454",
+                        "on-surface-variant": "#cbc3d7",
+                        "inverse-primary": "#6d3bd7",
+                        "tertiary-fixed": "#ffd9e4",
+                        "tertiary-fixed-dim": "#ffb0cd",
+                        "surface-container-high": "#222a3d",
+                        "surface-tint": "#d0bcff",
+                        "outline": "#958ea0",
+                        "on-primary-fixed": "#23005c",
+                        "surface-dim": "#0b1326",
+                        "surface-variant": "#2d3449",
+                        "on-secondary-fixed-variant": "#004e5c",
+                        "primary-fixed": "#e9ddff",
+                        "surface-container-lowest": "#060e20",
+                        "secondary-fixed": "#acedff",
+                        "secondary-fixed-dim": "#4cd7f6",
+                        "tertiary-container": "#f751a1",
+                        "surface": "#0b1326",
+                        "on-primary-container": "#340080",
+                        "background": "#0b1326",
+                        "inverse-on-surface": "#283044",
+                        "on-tertiary-fixed": "#3e0022",
+                        "on-tertiary-fixed-variant": "#8c0053",
+                        "on-primary": "#3c0091",
+                        "on-surface": "#dae2fd",
+                        "error": "#ffb4ab",
+                        "tertiary": "#ffb0cd",
+                        "inverse-surface": "#dae2fd",
+                        "on-primary-fixed-variant": "#5516be",
+                        "on-secondary": "#003640",
+                        "on-background": "#dae2fd",
+                        "error-container": "#93000a",
+                        "on-secondary-fixed": "#001f26",
+                        "on-error": "#690005",
+                        "primary-fixed-dim": "#d0bcff",
+                        "surface-container-low": "#131b2e"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "mono-data": ["Geist"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "display-lg-mobile": ["Plus Jakarta Sans"],
+                        "label-sm": ["Geist"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "mono-data": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "display-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen pb-24">
+<!-- TopAppBar Navigation Shell -->
+<header class="flex justify-between items-center px-margin-mobile h-16 w-full sticky top-0 z-50 bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-b border-white/10">
+<div class="flex items-center gap-3">
+<button class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-white/10 transition-all active:scale-90" onclick="history.back()">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">SonicEquity</h1>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant hover:opacity-80 transition-opacity cursor-pointer">settings</span>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-primary/30">
+<img class="w-full h-full object-cover" data-alt="A close-up portrait of a professional music producer in a dark, high-tech studio environment. The lighting is Moody with cyan and violet neon accents reflecting off high-end audio equipment. The style is sleek, cinematic, and professional, perfectly aligning with the Fintech-Music hybrid aesthetic of SonicEquity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEPZICiPneIzENdM9Knp7Sr0JHfHeVHkDlitkTdAcJX1ZA9Dj0V91ENt39j2NPihf5cOwqNIaTPb4qTibR0IVOQha7PQQDjXJROJ7OX2bBUlBmrz391XC0fwbObBrdAuDmfT6TNtlcTnhBUH0X4dSXj2otuHXL_BjQmC__TiEXqUvEqMRO97t9dgKnPqb7J_OP0TLWhsm2TwmTBfFyNgf7ZCo26Si2JBSKb6zkwfrIzMIyd_7q9OZ3fQVddUrMz1ksMwt8cGLnqA"/>
+</div>
+</div>
+</header>
+<main class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-8 space-y-12">
+<!-- Hero Section -->
+<section class="relative group">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+<div class="md:col-span-4 lg:col-span-3">
+<div class="aspect-square rounded-2xl overflow-hidden glass-card p-1">
+<div class="w-full h-full rounded-xl overflow-hidden relative">
+<img class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110" data-alt="Abstract album artwork for 'Midnight Echoes' featuring deep obsidian textures with flowing, luminous cyan and violet liquid metal shapes. The visual style mimics sound waves and high-fidelity digital audio signals, using a dark-mode glassmorphism aesthetic with soft luminous depth and high contrast." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtB2nRHyIYKmPIgiswGF3ZqioARPHTq9Bn-0GGZFpmQdkq3yoJIvjC22Tye4Icw-I6y4Eg1wET2hcT2p2OWRiDqZ3k7GwY2Tuh8mdwMAd5m8vum_-kV_L0KiaUR-Ghb2WxCl0d8kI0MUOAhnti49GH4Mm4-szvH_VZ-h8Sd7OBDbW18f1au9ifJ9rSb1okwlVNrTKC3vA4odiSojbB8IJ6JKA6FwsEebM4j1u_83Jl7UyaObvO_vA-6KYuHSoAf3pMmnkY38iW3A"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+</div>
+</div>
+</div>
+<div class="md:col-span-8 lg:col-span-9 space-y-4">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/15 text-secondary border border-secondary/20">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+<span class="font-label-sm text-label-sm">ON-CHAIN VERIFIED</span>
+</div>
+<h2 class="font-display-lg text-display-lg-mobile md:text-display-lg tracking-tight text-on-surface">Midnight Echoes</h2>
+<div class="flex flex-wrap gap-6 text-on-surface-variant">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined">person</span>
+<span class="font-body-md text-body-md">Luna Vane</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-body-md text-body-md">Released Oct 24, 2023</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined">layers</span>
+<span class="font-body-md text-body-md">32.5% Equity Owned</span>
+</div>
+</div>
+<div class="pt-4 flex gap-4">
+<button class="px-6 py-3 bg-gradient-to-r from-primary-container to-secondary-container text-on-primary-container font-semibold rounded-xl flex items-center gap-2 transition-all hover:shadow-[0_0_20px_rgba(160,120,255,0.4)] active:scale-95">
+<span class="material-symbols-outlined">payments</span>
+                            Collect Royalties
+                        </button>
+<button class="px-6 py-3 bg-white/5 border border-white/10 hover:bg-white/10 backdrop-blur-md text-on-surface font-semibold rounded-xl flex items-center gap-2 transition-all active:scale-95">
+<span class="material-symbols-outlined">share</span>
+                            Share Equity
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Main Content Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Split Breakdown List -->
+<div class="lg:col-span-5 space-y-6">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-md text-headline-md">Split Breakdown</h3>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Total 100%</span>
+</div>
+<div class="space-y-3">
+<!-- Collaborator 1 -->
+<div class="glass-card p-4 rounded-xl flex items-center justify-between hover:border-primary/50 transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="Portrait of a young female vocalist with soft lighting, set against a dark studio background with purple neon highlights. Professional and stylish, consistent with the high-fidelity music industry branding." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTiHVt1jI_nLISOCOCBnTxys_sN3RAueW-LF32dlH7_782Gy2j8OUnAEzIRRbn5TB2mv7WMmcvtykqXEz1F9T5vdj6Vnr-jY64GUK_1XKtfBBgpqng_OdVLl43nGqoUdK2G-CXpZreM4O8TTn9wAhewj8Skx7YBLrXcHjXtfEwm6I7qUBvO_gpdfa2dnQrTXuPw7YhDOhQLNPpSPXuqE5i_hwieGwaXg6HEmvSSje6URkJjPZaDYRvWB_GQ_4WPrC3WTD4hBRl2A"/>
+</div>
+<div>
+<p class="font-body-md text-body-md font-semibold text-on-surface">Luna Vane</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Primary Artist</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-mono-data text-headline-md text-primary">45.0%</p>
+<div class="w-24 h-1.5 flex gap-0.5 mt-1">
+<div class="level-meter-segment level-meter-active flex-grow"></div>
+<div class="level-meter-segment level-meter-active flex-grow"></div>
+<div class="level-meter-segment level-meter-active flex-grow"></div>
+<div class="level-meter-segment flex-grow"></div>
+</div>
+</div>
+</div>
+<!-- Collaborator 2 -->
+<div class="glass-card p-4 rounded-xl flex items-center justify-between hover:border-secondary/50 transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="Studio portrait of a music producer wearing high-end headphones, surrounded by analog synthesizers and glowing digital displays. The atmosphere is sophisticated and tech-forward." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJ32yTpZD6B64AND6hHv36qun8wIBVHA1vtkkNwYHKo80UgxFioID7VZfbUph8qvJlU3P_rWYBwttqwcDj-WaSxyuNy334g7vFU1GlH-YBR82ZcJiSI6CglBgPH_qnPeAonnJ2yVFg2M5pq1f8G1q-3SsqaxX2IBthIJh8q-uDs46F6MDK4adPAhT8_w6vw8B1tKNtHQ9NfOGoIaSffqmG8349CDNtsUGgHEIbzPQ_kfauVjdwwhCeuKfR_2khETr7xepqDWbuBQ"/>
+</div>
+<div>
+<p class="font-body-md text-body-md font-semibold text-on-surface">BeatArchitect</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Producer</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-mono-data text-headline-md text-secondary">30.0%</p>
+<div class="w-24 h-1.5 flex gap-0.5 mt-1">
+<div class="level-meter-segment level-meter-active flex-grow"></div>
+<div class="level-meter-segment level-meter-active flex-grow"></div>
+<div class="level-meter-segment flex-grow"></div>
+<div class="level-meter-segment flex-grow"></div>
+</div>
+</div>
+</div>
+<!-- Collaborator 3 -->
+<div class="glass-card p-4 rounded-xl flex items-center justify-between hover:border-white/20 transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="Close up of a songwriter's hands writing lyrics in a notebook on a dark desk illuminated by a single warm desk lamp, creating a focused and creative ambiance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDV37YRhgZ31_DAVhqjzTqnKKUsTMjci4FYFociose43x97e18lrf3f1BRTsY0ecwui22iICIwHvGC0cOSPeyAgOn0BSAwzqwQ9h30-jthbY1GI8xxlH4NLS1p6nLVL13k7jmPRpws706xCHXakuwXUBfTI2eFMifVaeKYZ7Pm8mBYp9SrIB-Kfk31n1xc2AGCSDLCZRWu6rtr5wYLc0NteBOTEF5ri4UV-z2yGcEqWg6p9uz4UFBMEiEbSDDC-QpBvlwyaTxXCTg"/>
+</div>
+<div>
+<p class="font-body-md text-body-md font-semibold text-on-surface">GhostWriter 9</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Writer</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-mono-data text-headline-md text-on-surface-variant">25.0%</p>
+<div class="w-24 h-1.5 flex gap-0.5 mt-1">
+<div class="level-meter-segment level-meter-active flex-grow"></div>
+<div class="level-meter-segment level-meter-active flex-grow"></div>
+<div class="level-meter-segment flex-grow"></div>
+<div class="level-meter-segment flex-grow"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Payout History & Analytics -->
+<div class="lg:col-span-7 space-y-6">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-md text-headline-md">Payout History</h3>
+<div class="flex gap-2">
+<button class="px-3 py-1 font-label-sm text-label-sm rounded-md bg-white/10 text-on-surface">1M</button>
+<button class="px-3 py-1 font-label-sm text-label-sm rounded-md hover:bg-white/5 transition-colors">6M</button>
+<button class="px-3 py-1 font-label-sm text-label-sm rounded-md hover:bg-white/5 transition-colors">1Y</button>
+</div>
+</div>
+<div class="glass-card p-6 rounded-2xl h-80 relative overflow-hidden group">
+<!-- SVG Chart Visualization -->
+<svg class="w-full h-full overflow-visible" preserveaspectratio="none" viewbox="0 0 1000 300">
+<defs>
+<lineargradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#4cd7f6" stop-opacity="0.3"></stop>
+<stop offset="100%" stop-color="#4cd7f6" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<!-- Grid Lines -->
+<line stroke="rgba(255,255,255,0.05)" stroke-width="1" x1="0" x2="1000" y1="50" y2="50"></line>
+<line stroke="rgba(255,255,255,0.05)" stroke-width="1" x1="0" x2="1000" y1="150" y2="150"></line>
+<line stroke="rgba(255,255,255,0.05)" stroke-width="1" x1="0" x2="1000" y1="250" y2="250"></line>
+<!-- Path -->
+<path class="drop-shadow-[0_0_8px_rgba(76,215,246,0.6)]" d="M0,280 Q100,260 200,200 T400,180 T600,100 T800,120 T1000,50" fill="transparent" stroke="#4cd7f6" stroke-width="3"></path>
+<path d="M0,280 Q100,260 200,200 T400,180 T600,100 T800,120 T1000,50 V300 H0 Z" fill="url(#chartGradient)"></path>
+<!-- Hover points simulation -->
+<circle class="animate-pulse" cx="600" cy="100" fill="#4cd7f6" r="6"></circle>
+</svg>
+<!-- Floating Stat -->
+<div class="absolute top-10 right-10 p-3 glass-card rounded-lg border border-secondary/30">
+<p class="font-label-sm text-label-sm text-secondary">PEAK EARNINGS</p>
+<p class="font-mono-data text-body-lg font-bold text-on-surface">$2,482.10</p>
+</div>
+</div>
+<!-- Transparency / Contract Section -->
+<div class="space-y-4">
+<h3 class="font-headline-md text-headline-md">Smart Contract</h3>
+<div class="glass-card p-4 rounded-xl flex flex-col md:flex-row items-center justify-between gap-4">
+<div class="flex items-center gap-3 w-full">
+<div class="p-2 bg-primary/10 rounded-lg text-primary">
+<span class="material-symbols-outlined">terminal</span>
+</div>
+<div class="overflow-hidden w-full">
+<p class="font-label-sm text-label-sm text-on-surface-variant">ETHEREUM CONTRACT ADDRESS</p>
+<p class="font-mono-data text-body-md text-on-surface truncate" id="contractAddress">0x71C7656EC7ab88b098defB751B7401B5f6d8976F</p>
+</div>
+</div>
+<button class="flex-shrink-0 w-full md:w-auto px-6 py-2 rounded-lg bg-surface-container-highest hover:bg-surface-bright transition-colors flex items-center justify-center gap-2 font-label-sm text-label-sm active:scale-95" onclick="copyToClipboard('0x71C7656EC7ab88b098defB751B7401B5f6d8976F', this)">
+<span class="material-symbols-outlined text-[18px]">content_copy</span>
+                            Copy Address
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar Navigation Shell -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 py-2 pb-safe bg-surface-container/90 dark:bg-surface-container/90 backdrop-blur-2xl border-t border-white/5 rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant opacity-60 hover:text-secondary transition-colors Active: scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-sm text-label-sm">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary-container text-on-secondary-container dark:text-on-secondary-container rounded-full px-4 py-1 Active: scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">album</span>
+<span class="font-label-sm text-label-sm">Projects</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant opacity-60 hover:text-secondary transition-colors Active: scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined">add_circle</span>
+<span class="font-label-sm text-label-sm">Split</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant opacity-60 hover:text-secondary transition-colors Active: scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="font-label-sm text-label-sm">Wallet</span>
+</a>
+</nav>
+<script>
+        function copyToClipboard(text, btn) {
+            navigator.clipboard.writeText(text).then(() => {
+                const originalContent = btn.innerHTML;
+                btn.innerHTML = `<span class="material-symbols-outlined text-[18px] text-secondary">check</span> <span class="text-secondary">Copied!</span>`;
+                btn.classList.add('border-secondary/50');
+                setTimeout(() => {
+                    btn.innerHTML = originalContent;
+                    btn.classList.remove('border-secondary/50');
+                }, 2000);
+            });
+        }
+
+        // Simple enter animation for glass cards
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.glass-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'all 0.6s cubic-bezier(0.22, 1, 0.36, 1)';
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,11 @@
+{
+  "name": "stellar-royalty-platform",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "npm --prefix frontend run dev",
+    "build": "cd frontend && npm install && npm run build",
+    "start": "npm --prefix frontend run start",
+    "postinstall": "cd frontend && npm install"
+  }
+}

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Geist:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=Inter:wght@100..900&amp;family=Plus+Jakarta+Sans:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-primary-fixed": "#23005c",
+            "on-tertiary-fixed-variant": "#8c0053",
+            "secondary-fixed": "#acedff",
+            "on-secondary": "#003640",
+            "on-primary-container": "#340080",
+            "on-surface-variant": "#cbc3d7",
+            "surface-container-high": "#222a3d",
+            "on-secondary-fixed": "#001f26",
+            "on-primary": "#3c0091",
+            "on-background": "#dae2fd",
+            "on-error": "#690005",
+            "primary": "#d0bcff",
+            "primary-container": "#a078ff",
+            "tertiary-fixed": "#ffd9e4",
+            "surface-bright": "#31394d",
+            "on-surface": "#dae2fd",
+            "surface-tint": "#d0bcff",
+            "outline": "#958ea0",
+            "inverse-primary": "#6d3bd7",
+            "outline-variant": "#494454",
+            "error-container": "#93000a",
+            "on-tertiary-container": "#570032",
+            "tertiary-container": "#f751a1",
+            "surface": "#0b1326",
+            "surface-container-low": "#131b2e",
+            "inverse-on-surface": "#283044",
+            "secondary-fixed-dim": "#4cd7f6",
+            "on-secondary-fixed-variant": "#004e5c",
+            "tertiary": "#ffb0cd",
+            "surface-dim": "#0b1326",
+            "secondary": "#4cd7f6",
+            "primary-fixed": "#e9ddff",
+            "on-error-container": "#ffdad6",
+            "background": "#0b1326",
+            "secondary-container": "#03b5d3",
+            "on-secondary-container": "#00424e",
+            "surface-variant": "#2d3449",
+            "surface-container-lowest": "#060e20",
+            "surface-container-highest": "#2d3449",
+            "surface-container": "#171f33",
+            "primary-fixed-dim": "#d0bcff",
+            "error": "#ffb4ab",
+            "tertiary-fixed-dim": "#ffb0cd",
+            "inverse-surface": "#dae2fd",
+            "on-tertiary": "#640039",
+            "on-primary-fixed-variant": "#5516be",
+            "on-tertiary-fixed": "#3e0022"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "margin-mobile": "16px",
+            "container-max": "1280px",
+            "gutter": "24px",
+            "unit": "4px",
+            "margin-desktop": "48px"
+          },
+          "fontFamily": {
+            "mono-data": ["Geist"],
+            "label-sm": ["Geist"],
+            "display-lg-mobile": ["Plus Jakarta Sans"],
+            "display-lg": ["Plus Jakarta Sans"],
+            "body-md": ["Inter"],
+            "body-lg": ["Inter"],
+            "headline-md": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "mono-data": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+            "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500"}],
+            "display-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+            "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+            "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+            "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+            "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .glass-panel {
+      background: rgba(23, 31, 51, 0.7);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05);
+    }
+    .level-meter-bg {
+      background: rgba(255, 255, 255, 0.05);
+      overflow: hidden;
+      position: relative;
+    }
+    .level-meter-fill {
+      background: linear-gradient(90deg, #d0bcff 0%, #4cd7f6 100%);
+      box-shadow: 0 0 15px rgba(76, 215, 246, 0.5);
+    }
+    .pulse-glow {
+      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(0.98); }
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .scan-line {
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background: rgba(76, 215, 246, 0.3);
+      top: 0;
+      animation: scan 3s linear infinite;
+    }
+    @keyframes scan {
+      0% { top: 0; }
+      100% { top: 100%; }
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen font-body-md overflow-hidden selection:bg-primary/30">
+<!-- Background Layer (Simulation of App Dashboard) -->
+<div class="fixed inset-0 z-0">
+
+<div class="absolute inset-0 bg-gradient-to-b from-transparent to-surface pointer-events-none"></div>
+<!-- Ghosted Dashboard Content -->
+<div class="container mx-auto px-margin-desktop py-12 opacity-20 blur-sm pointer-events-none">
+<div class="grid grid-cols-12 gap-gutter">
+<div class="col-span-8 space-y-8">
+<div class="h-64 glass-panel rounded-xl"></div>
+<div class="grid grid-cols-2 gap-gutter">
+<div class="h-48 glass-panel rounded-xl"></div>
+<div class="h-48 glass-panel rounded-xl"></div>
+</div>
+</div>
+<div class="col-span-4 h-[600px] glass-panel rounded-xl"></div>
+</div>
+</div>
+</div>
+<!-- Modal Overlay -->
+<div class="fixed inset-0 z-[60] flex items-center justify-center p-margin-mobile bg-surface/60 backdrop-blur-md">
+<!-- Modal Container -->
+<div class="relative w-full max-w-xl glass-panel rounded-3xl p-8 md:p-12 overflow-hidden shadow-2xl">
+<div class="scan-line"></div>
+<!-- Top Decorative Element -->
+<div class="flex justify-center mb-8">
+<div class="w-16 h-16 rounded-full bg-secondary-container/10 border border-secondary/20 flex items-center justify-center relative">
+<div class="absolute inset-0 rounded-full border border-secondary/40 animate-ping opacity-20"></div>
+<span class="material-symbols-outlined text-secondary text-4xl" data-icon="account_balance_wallet">account_balance_wallet</span>
+</div>
+</div>
+<!-- Main Headline -->
+<div class="text-center mb-10">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-2">Claim Royalties</h2>
+<p class="font-body-md text-on-surface-variant">Transfer accrued sonic equity to your secure wallet.</p>
+</div>
+<!-- XLM Amount Display -->
+<div class="glass-panel rounded-2xl p-8 mb-8 bg-surface-container-highest/30 border-white/5 relative group">
+<div class="absolute top-4 right-4">
+<span class="font-label-sm text-label-sm text-secondary px-3 py-1 bg-secondary/10 rounded-full border border-secondary/20">ESTIMATED</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mb-2">Total Receivable</span>
+<div class="flex items-baseline gap-2">
+<span class="font-display-lg text-display-lg text-primary drop-shadow-[0_0_10px_rgba(208,188,255,0.4)]">12,482.50</span>
+<span class="font-headline-md text-headline-md text-on-surface-variant">XLM</span>
+</div>
+<span class="font-mono-data text-mono-data text-secondary/70 mt-2">≈ $1,560.31 USD</span>
+</div>
+</div>
+<!-- Detailed Breakdown -->
+<div class="space-y-4 mb-8">
+<div class="flex justify-between items-center px-4">
+<span class="font-body-md text-on-surface-variant">Claimable Balance</span>
+<span class="font-mono-data text-mono-data text-on-surface">12,482.5001 XLM</span>
+</div>
+<div class="flex justify-between items-center px-4">
+<div class="flex items-center gap-2">
+<span class="font-body-md text-on-surface-variant">Network Gas Fee</span>
+<span class="material-symbols-outlined text-on-surface-variant text-sm" data-icon="info">info</span>
+</div>
+<span class="font-mono-data text-mono-data text-error">0.0001 XLM</span>
+</div>
+<div class="h-px bg-white/10 mx-4"></div>
+<div class="flex justify-between items-center px-4">
+<span class="font-headline-md text-headline-md text-on-surface">Net Amount</span>
+<span class="font-headline-md text-headline-md text-secondary">12,482.50 XLM</span>
+</div>
+</div>
+<!-- High-Tech Progress/Status Bar -->
+<div class="mb-10">
+<div class="flex justify-between mb-2 px-1">
+<span class="font-label-sm text-label-sm text-secondary flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+            NETWORK READY
+          </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">SIGNAL: STABLE</span>
+</div>
+<div class="h-3 w-full level-meter-bg rounded-full p-[2px]">
+<div class="h-full w-[94%] level-meter-fill rounded-full relative overflow-hidden transition-all duration-1000 ease-out">
+<div class="absolute inset-0 bg-[linear-gradient(90deg,transparent_0%,rgba(255,255,255,0.3)_50%,transparent_100%)] w-1/2 -skew-x-12 animate-[shimmer_2s_infinite]"></div>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex flex-col gap-4">
+<button class="pulse-glow relative w-full py-5 rounded-2xl bg-gradient-to-r from-primary-container to-secondary-container text-on-primary-container font-headline-md text-headline-md flex items-center justify-center gap-3 shadow-[0_0_30px_rgba(3,181,211,0.3)] hover:shadow-[0_0_45px_rgba(3,181,211,0.5)] transition-all transform active:scale-[0.98]">
+          Confirm Withdrawal
+          <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<button class="w-full py-4 text-on-surface-variant hover:text-on-surface font-body-md transition-colors flex items-center justify-center gap-2">
+          Cancel and Return to Wallet
+        </button>
+</div>
+<!-- Security Note -->
+<div class="mt-8 pt-6 border-t border-white/5 text-center">
+<div class="flex items-center justify-center gap-2 opacity-50">
+<span class="material-symbols-outlined text-sm" data-icon="lock" style="font-variation-settings: 'FILL' 1;">lock</span>
+<span class="font-label-sm text-label-sm">Secured by Stellar Blockchain Network</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Decorative Light Leaks -->
+<div class="fixed top-[-10%] right-[-10%] w-[50%] h-[50%] bg-primary/20 blur-[120px] pointer-events-none rounded-full z-10"></div>
+<div class="fixed bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-secondary/10 blur-[120px] pointer-events-none rounded-full z-10"></div>
+<script>
+    // Micro-interaction for progress bar
+    document.addEventListener('DOMContentLoaded', () => {
+      const meterFill = document.querySelector('.level-meter-fill');
+      // Subtle pulse to simulate network latency check
+      setInterval(() => {
+        const randomWidth = 92 + Math.random() * 6;
+        meterFill.style.width = `${randomWidth}%`;
+      }, 3000);
+    });
+
+    // Custom Shimmer Animation Injection
+    const style = document.createElement('style');
+    style.innerHTML = `
+      @keyframes shimmer {
+        0% { transform: translateX(-200%); }
+        100% { transform: translateX(300%); }
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+</body></html>
